@@ -842,10 +842,10 @@ class DataStore {
     }
     if (!localStorage.getItem("gv_activity")) {
       localStorage.setItem("gv_activity", JSON.stringify([
-        { id: "act-1", type: "Deposit", title: "Bank Wire Deposit", amount: 15000, date: "2026-10-21", status: "Completed", category: "Deposit" },
-        { id: "act-2", type: "Investment", title: "Auto-Invest: S&P Tech Titans", amount: -2500, date: "2026-10-22", status: "Completed", category: "Investment" },
-        { id: "act-3", type: "Dividend", title: "Apex REIT Quarterly Dividend", amount: 284.50, date: "2026-10-22", status: "Completed", category: "Earnings" },
-        { id: "act-4", type: "Rebalance", title: "Tax-Advantaged Portfolio Rebalance", amount: 0, date: "2026-10-23", status: "Completed", category: "Rebalance" }
+        { id: "act-1", username: "AlexRivers", type: "Deposit", title: "Bank Wire Deposit", amount: 15000, date: "2026-10-21", status: "Completed", category: "Deposit" },
+        { id: "act-2", username: "AlexRivers", type: "Investment", title: "Auto-Invest: S&P Tech Titans", amount: -2500, date: "2026-10-22", status: "Completed", category: "Investment" },
+        { id: "act-3", username: "AlexRivers", type: "Dividend", title: "Apex REIT Quarterly Dividend", amount: 284.50, date: "2026-10-22", status: "Completed", category: "Earnings" },
+        { id: "act-4", username: "AlexRivers", type: "Rebalance", title: "Tax-Advantaged Portfolio Rebalance", amount: 0, date: "2026-10-23", status: "Completed", category: "Rebalance" }
       ]));
     }
     if (!localStorage.getItem("gv_saved_properties")) {
@@ -869,6 +869,10 @@ class DataStore {
     if (idx !== -1) {
       users[idx] = user;
       this.saveUsers(users);
+      // Synchronize active session if current user updated
+      if (AppState.currentUser && AppState.currentUser.username.toLowerCase() === user.username.toLowerCase()) {
+        AppState.currentUser = user;
+      }
     }
   }
 

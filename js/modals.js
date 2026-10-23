@@ -330,6 +330,7 @@ function handleFundGoalSubmit(e, goalId) {
   window.gvStore.updateUser(user);
   window.gvStore.addActivity({
     id: `act-${Date.now()}`,
+    username: user.username,
     type: "Investment",
     title: `Direct Fund: ${goal.name}`,
     amount: -amt,
@@ -562,15 +563,27 @@ function handleUserTransferSubmit(e) {
   window.gvStore.updateUser(sender);
   window.gvStore.updateUser(recipient);
 
-  // Record activities
+  // Record activities for both sender and recipient
   window.gvStore.addActivity({
     id: `act-${Date.now()}`,
     type: "Transfer",
+    username: sender.username,
     title: `Transfer to @${recipient.username} (${memo})`,
     amount: -amt,
     date: new Date().toISOString().split('T')[0],
     status: "Completed",
     category: "Payment"
+  });
+
+  window.gvStore.addActivity({
+    id: `act-${Date.now() + 1}`,
+    type: "Deposit",
+    username: recipient.username,
+    title: `User Transfer from @${sender.username} (${memo})`,
+    amount: amt,
+    date: new Date().toISOString().split('T')[0],
+    status: "Completed",
+    category: "Deposit"
   });
 
   closeGeneralModal();
@@ -659,6 +672,19 @@ function handleAdminAdjustWalletSubmit(e, username) {
   }
 
   window.gvStore.updateUser(user);
+
+  // Record administrative balance transaction in activity ledger
+  window.gvStore.addActivity({
+    id: `act-${Date.now()}`,
+    username: user.username,
+    type: "Rebalance",
+    title: `Admin Balance Adjustment (${op.toUpperCase()} ${field} by ${formatCurrency(amt)})`,
+    amount: op === 'add' ? amt : op === 'subtract' ? -amt : 0,
+    date: new Date().toISOString().split('T')[0],
+    status: "Completed",
+    category: "Rebalance"
+  });
+
   closeGeneralModal();
   showToast('Wallet Adjusted', `Updated @${user.username} ${field} to ${formatCurrency(user.wallet[field])}.`, 'success');
   renderCurrentView();
@@ -672,16 +698,36 @@ function handleAuthenticatePayment(reqId, status) {
   req.status = status;
   window.gvStore.savePaymentRequests(reqs);
 
-  // If approved, update user's wallet
+  // If approved, update user's wallet and ledger
   if (status === 'Approved') {
     const user = window.gvStore.getUser(req.username);
     if (user) {
       if (req.type === 'Deposit') {
         user.wallet.availableBalance += req.amount;
         user.wallet.deposits += req.amount;
+        window.gvStore.addActivity({
+          id: `act-${Date.now()}`,
+          username: user.username,
+          type: "Deposit",
+          title: `Admin Authenticated Deposit (${req.method})`,
+          amount: req.amount,
+          date: new Date().toISOString().split('T')[0],
+          status: "Completed",
+          category: "Deposit"
+        });
       } else if (req.type === 'Withdrawal') {
         user.wallet.availableBalance = Math.max(0, user.wallet.availableBalance - req.amount);
         user.wallet.withdrawals += req.amount;
+        window.gvStore.addActivity({
+          id: `act-${Date.now()}`,
+          username: user.username,
+          type: "Withdrawal",
+          title: `Admin Authenticated Payout (${req.method})`,
+          amount: -req.amount,
+          date: new Date().toISOString().split('T')[0],
+          status: "Completed",
+          category: "Payment"
+        });
       }
       window.gvStore.updateUser(user);
     }
@@ -1134,6 +1180,7 @@ function handleExecuteStockTrade(e, symbol) {
   window.gvStore.updateUser(user);
   window.gvStore.addActivity({
     id: `act-${Date.now()}`,
+    username: user.username,
     type: "Trade",
     title: `${side.toUpperCase()} ${shares} sh ${stock.symbol} @ $${stock.currentPrice.toFixed(2)}`,
     amount: side === 'buy' ? -totalCost : totalCost,
@@ -1215,6 +1262,7 @@ function handleExecuteCryptoTrade(e, symbol) {
   window.gvStore.updateUser(user);
   window.gvStore.addActivity({
     id: `act-${Date.now()}`,
+    username: user.username,
     type: "Crypto",
     title: `${side.toUpperCase()} $${amtUsd.toLocaleString()} ${symbol}`,
     amount: side === 'buy' ? -amtUsd : amtUsd,
@@ -1528,6 +1576,7 @@ function handleCompleteCheckout(e) {
   // Record Activity
   window.gvStore.addActivity({
     id: `act-${Date.now()}`,
+    username: user.username,
     type: "Purchase",
     title: `Order #${orderId} (${payMethod})`,
     amount: -totalDueToday,

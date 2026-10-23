@@ -281,7 +281,7 @@ function getDashboardView() {
   const announcements = window.gvStore.getAnnouncements().filter(a => a.audience === 'All users' || a.audience === user.username);
   const chats = window.gvStore.getChats().filter(c => c.from === user.username || c.to === user.username);
   const paymentRequests = window.gvStore.getPaymentRequests().filter(p => p.username === user.username);
-  const activity = window.gvStore.getActivity().slice(0, 5);
+  const activity = window.gvStore.getActivity().filter(a => !a.username || a.username.toLowerCase() === user.username.toLowerCase()).slice(0, 5);
 
   const totalProgress = user.goals.length > 0
     ? Math.round((user.goals.reduce((acc, g) => acc + g.currentAmount, 0) / user.goals.reduce((acc, g) => acc + g.targetAmount, 1)) * 100)
@@ -1624,9 +1624,15 @@ function getSimulatorView() {
 // -------------------------------------------------------------
 function getActivityView() {
   const acts = window.gvStore.getActivity();
+  const user = AppState.currentUser;
   const f = AppState.activityFilter;
 
-  const filtered = acts.filter(a => {
+  // Filter by user if not admin
+  const userActs = AppState.isAdmin
+    ? acts
+    : acts.filter(a => !a.username || (user && a.username.toLowerCase() === user.username.toLowerCase()));
+
+  const filtered = userActs.filter(a => {
     if (f.category !== 'all' && a.category !== f.category) return false;
     if (f.search && !a.title.toLowerCase().includes(f.search.toLowerCase()) && !a.type.toLowerCase().includes(f.search.toLowerCase())) return false;
     return true;
@@ -1652,7 +1658,8 @@ function getActivityView() {
             <option value="Deposit" ${f.category === 'Deposit' ? 'selected' : ''}>Deposits</option>
             <option value="Investment" ${f.category === 'Investment' ? 'selected' : ''}>Investments</option>
             <option value="Earnings" ${f.category === 'Earnings' ? 'selected' : ''}>Earnings &amp; Dividends</option>
-            <option value="Rebalance" ${f.category === 'Rebalance' ? 'selected' : ''}>Rebalances</option>
+            <option value="Payment" ${f.category === 'Payment' ? 'selected' : ''}>Payments &amp; Transfers</option>
+            <option value="Rebalance" ${f.category === 'Rebalance' ? 'selected' : ''}>Rebalances &amp; Adjustments</option>
           </select>
         </div>
       </div>
@@ -1663,6 +1670,7 @@ function getActivityView() {
             <thead>
               <tr>
                 <th>Record ID</th>
+                <th>Account</th>
                 <th>Type</th>
                 <th>Transaction Title</th>
                 <th>Category</th>
@@ -1675,6 +1683,7 @@ function getActivityView() {
               ${filtered.map(a => `
                 <tr>
                   <td style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim);">${a.id}</td>
+                  <td style="font-weight: 600; color: #fff;">@${a.username || 'System'}</td>
                   <td><span class="badge ${a.amount >= 0 ? 'badge-green' : 'badge-blue'}">${a.type}</span></td>
                   <td style="font-weight: 700; color: #fff;">${a.title}</td>
                   <td>${a.category}</td>
