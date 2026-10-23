@@ -345,7 +345,7 @@ function getHomeView() {
                 </a>
               </li>
             </ul>
-            <button class="btn btn-secondary btn-sm btn-block" onclick="openAuthModal('signin')">ADMIN CONSOLE LOGIN</button>
+            <button class="btn btn-primary btn-sm btn-block" onclick="openAuthModal('signin')">SIGN IN TO VAULT</button>
           </div>
         </div>
         <div style="max-width: 1300px; margin: 3rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.82rem; color: var(--text-dim);">
