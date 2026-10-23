@@ -787,8 +787,8 @@ function openCreateUserModal() {
           </select>
         </div>
         <div>
-          <label style="display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.35rem;">Password</label>
-          <input type="password" id="admin-user-pass" value="Password123!" required />
+          <label style="display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.35rem;">Temporary Password</label>
+          <input type="password" id="admin-user-pass" placeholder="Set secure password" required />
         </div>
       </div>
       <div class="modal-footer">
