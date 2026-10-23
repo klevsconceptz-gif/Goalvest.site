@@ -17,62 +17,7 @@ class PRNG {
 const prng = new PRNG(Date.now() % 100000);
 
 // Default User Storage
-const DEFAULT_USERS = [
-  {
-    username: "AlexRivers",
-    name: "Alex Rivers",
-    email: "alex@rivers.capital",
-    password: "Password123!",
-    plan: "Growth",
-    riskProfile: "Aggressive",
-    autoInvest: true,
-    roundUps: true,
-    notifications: true,
-    wallet: {
-      availableBalance: 42850.75,
-      investmentValue: 185600.00,
-      earnings: 24350.20,
-      totalInvested: 161249.80,
-      deposits: 145000.00,
-      withdrawals: 18000.00
-    },
-    goals: [
-      {
-        id: "goal-1",
-        name: "Cybertruck & Clean Garage",
-        targetAmount: 120000,
-        currentAmount: 84500,
-        monthlyContribution: 2500,
-        targetDate: "2027-12-31",
-        riskProfile: "Moderate Growth",
-        allocation: { "US Equity": 40, "Emerging Tech": 30, "Fixed Income": 15, "Cash": 15 },
-        tier: "Premium"
-      },
-      {
-        id: "goal-2",
-        name: "Pacific Villa Down Payment",
-        targetAmount: 1380000,
-        currentAmount: 490000,
-        monthlyContribution: 12000,
-        targetDate: "2029-06-30",
-        riskProfile: "Aggressive",
-        allocation: { "US Equity": 50, "Real Estate REITs": 30, "Crypto": 10, "Cash": 10 },
-        tier: "Wealth"
-      },
-      {
-        id: "goal-3",
-        name: "Autonomous Mobility Fund",
-        targetAmount: 25000,
-        currentAmount: 18200,
-        monthlyContribution: 850,
-        targetDate: "2027-04-15",
-        riskProfile: "Growth",
-        allocation: { "Tech Equities": 70, "Commodities": 15, "Cash": 15 },
-        tier: "Growth"
-      }
-    ]
-  }
-];
+const DEFAULT_USERS = [];
 
 // Stocks Database (Major tech & Elon-related)
 const STOCKS_DB = [
@@ -815,82 +760,32 @@ class DataStore {
       localStorage.setItem("gv_deposit_methods", JSON.stringify(DEFAULT_DEPOSIT_METHODS));
     }
     if (!localStorage.getItem("gv_payment_requests")) {
-      localStorage.setItem("gv_payment_requests", JSON.stringify([
-        {
-          id: "req-101",
-          username: "AlexRivers",
-          type: "Deposit",
-          amount: 15000,
-          method: "Bank Wire Transfer",
-          details: "Ref: FED-992384 Wire from Chase Private Client",
-          status: "Approved",
-          timestamp: "2026-10-21 14:32:00"
-        },
-        {
-          id: "req-102",
-          username: "AlexRivers",
-          type: "Withdrawal",
-          amount: 2500,
-          method: "Bank Account Transfer",
-          details: "Bank: Chase checking ...4892",
-          status: "Pending",
-          timestamp: "2026-10-23 09:15:00"
-        }
-      ]));
+      localStorage.setItem("gv_payment_requests", JSON.stringify([]));
     }
     if (!localStorage.getItem("gv_announcements")) {
       localStorage.setItem("gv_announcements", JSON.stringify([
         {
           id: "anc-1",
-          title: "GoalVest Q4 Asset Allocation & Tax Rebalancing Now Live",
-          body: "Our portfolio intelligence engine has implemented tax-loss harvesting and autonomous sector weighting adjustments across all Tier accounts.",
+          title: "GoalVest Global Wealth & Asset Infrastructure Live",
+          body: "Our portfolio intelligence engine, multi-tier wealth architecture, automated contributions, and physical hardware reservations are officially operational. Open your first goal and begin building.",
           audience: "All users",
           level: "Important",
           author: "Admin",
-          createdDate: "2026-10-22 10:00"
-        },
-        {
-          id: "anc-2",
-          title: "Tesla Cyberbeast & Humanoid Reservations Priority Allocation",
-          body: "Verified GoalVest Growth, Premium, and Wealth tier members have exclusive first-batch build priority on Cybertruck and Optimus Gen 3 reservations.",
-          audience: "AlexRivers",
-          level: "Exclusive",
-          author: "Admin",
-          createdDate: "2026-10-23 08:30"
+          createdDate: "2026-10-24 10:00"
         }
       ]));
     }
     if (!localStorage.getItem("gv_chats")) {
-      localStorage.setItem("gv_chats", JSON.stringify([
-        {
-          id: "msg-1",
-          from: "AlexRivers",
-          to: "Admin",
-          text: "Hello Admin, could you please verify my recent $15,000 wire deposit for my Cybertruck goal?",
-          timestamp: "2026-10-21 14:35"
-        },
-        {
-          id: "msg-2",
-          from: "Admin",
-          to: "AlexRivers",
-          text: "Hi Alex! Wire FED-992384 has been fully authenticated and credited to your available wallet balance. Let us know if you need anything else!",
-          timestamp: "2026-10-21 14:48"
-        }
-      ]));
+      localStorage.setItem("gv_chats", JSON.stringify([]));
     }
     if (!localStorage.getItem("gv_orders")) {
       localStorage.setItem("gv_orders", JSON.stringify([]));
     }
     if (!localStorage.getItem("gv_activity")) {
-      localStorage.setItem("gv_activity", JSON.stringify([
-        { id: "act-1", username: "AlexRivers", type: "Deposit", title: "Bank Wire Deposit", amount: 15000, date: "2026-10-21", status: "Completed", category: "Deposit" },
-        { id: "act-2", username: "AlexRivers", type: "Investment", title: "Auto-Invest: S&P Tech Titans", amount: -2500, date: "2026-10-22", status: "Completed", category: "Investment" },
-        { id: "act-3", username: "AlexRivers", type: "Dividend", title: "Apex REIT Quarterly Dividend", amount: 284.50, date: "2026-10-22", status: "Completed", category: "Earnings" },
-        { id: "act-4", username: "AlexRivers", type: "Rebalance", title: "Tax-Advantaged Portfolio Rebalance", amount: 0, date: "2026-10-23", status: "Completed", category: "Rebalance" }
-      ]));
+      localStorage.setItem("gv_activity", JSON.stringify([]));
     }
     if (!localStorage.getItem("gv_saved_properties")) {
-      localStorage.setItem("gv_saved_properties", JSON.stringify(["prop-1", "prop-4"]));
+      localStorage.setItem("gv_saved_properties", JSON.stringify([]));
     }
   }
 

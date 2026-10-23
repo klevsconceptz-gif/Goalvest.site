@@ -32,77 +32,27 @@ const DEFAULT_DB = {
     androidPackage: "dev.goalvest.app",
     iosBundleId: "dev.goalvest.app"
   },
-  users: [
-    {
-      username: "AlexRivers",
-      name: "Alex Rivers",
-      email: "alex@rivers.capital",
-      password: "Password123!",
-      plan: "Growth",
-      riskProfile: "Aggressive",
-      autoInvest: true,
-      roundUps: true,
-      notifications: true,
-      wallet: {
-        availableBalance: 42850.75,
-        investmentValue: 185600.00,
-        earnings: 24350.20,
-        totalInvested: 161249.80,
-        deposits: 145000.00,
-        withdrawals: 18000.00
-      },
-      goals: [
-        {
-          id: "goal-1",
-          name: "Cybertruck & Clean Garage",
-          targetAmount: 120000,
-          currentAmount: 84500,
-          monthlyContribution: 2500,
-          targetDate: "2027-12-31",
-          riskProfile: "Moderate Growth",
-          allocation: { "US Equity": 40, "Emerging Tech": 30, "Fixed Income": 15, "Cash": 15 },
-          tier: "Premium"
-        },
-        {
-          id: "goal-2",
-          name: "Pacific Villa Down Payment",
-          targetAmount: 1380000,
-          currentAmount: 490000,
-          monthlyContribution: 12000,
-          targetDate: "2029-06-30",
-          riskProfile: "Aggressive",
-          allocation: { "US Equity": 50, "Real Estate REITs": 30, "Crypto": 10, "Cash": 10 },
-          tier: "Wealth"
-        }
-      ]
-    }
-  ],
+  users: [],
   announcements: [
     {
       id: "anc-1",
-      title: "GoalVest Q4 Asset Allocation & Tax Rebalancing Now Live",
-      body: "Our portfolio intelligence engine has implemented tax-loss harvesting and autonomous sector weighting adjustments across all Tier accounts.",
+      title: "GoalVest Global Wealth & Asset Infrastructure Live",
+      body: "Our portfolio intelligence engine, multi-tier wealth architecture, automated contributions, and physical hardware reservations are officially operational.",
       audience: "All users",
       level: "Important",
       author: "Admin",
-      createdDate: "2026-10-22 10:00"
+      createdDate: "2026-10-24 10:00"
     }
   ],
-  paymentRequests: [
-    {
-      id: "req-101",
-      username: "AlexRivers",
-      type: "Deposit",
-      amount: 15000,
-      method: "Bank Wire Transfer",
-      details: "Ref: FED-992384 Wire from Chase Private Client",
-      status: "Approved",
-      timestamp: "2026-10-21 14:32:00"
-    }
-  ],
-  activity: [
-    { id: "act-1", username: "AlexRivers", type: "Deposit", title: "Bank Wire Deposit", amount: 15000, date: "2026-10-21", status: "Completed", category: "Deposit" }
-  ]
+  paymentRequests: [],
+  activity: [],
+  community: {
+    telegramVIP: "https://t.me/GoalVestVIP",
+    telegramSupport: "https://t.me/GoalVestSupport",
+    xTwitter: "https://x.com/GoalVestApp",
+    instagram: "https://instagram.com/GoalVestOfficial",
+    threads: "https://threads.net/@GoalVestOfficial"
+  }
 };
 
 function readDb() {
@@ -183,6 +133,44 @@ const server = http.createServer((req, res) => {
           res.writeHead(400);
           res.end(JSON.stringify({ error: 'Malformed JSON payload' }));
         }
+      });
+      return;
+    }
+
+    // User Signup Endpoint
+    if (pathname === '/api/auth/signup' && req.method === 'POST') {
+      let body = '';
+      req.on('data', chunk => body += chunk);
+      req.on('end', () => {
+        try {
+          const { username, name, email, password, plan } = JSON.parse(body);
+          const db = readDb();
+          if (username.toLowerCase() === 'admin') {
+            res.writeHead(400); res.end(JSON.stringify({ error: 'Username reserved' })); return;
+          }
+          if (db.users.find(u => u.username.toLowerCase() === username.toLowerCase())) {
+            res.writeHead(409); res.end(JSON.stringify({ error: 'Username already exists' })); return;
+          }
+          const newUser = {
+            username, name, email, password,
+            plan: plan || 'Starter',
+            riskProfile: 'Growth', autoInvest: true, roundUps: false, notifications: true,
+            wallet: { availableBalance: 0, investmentValue: 0, earnings: 0, totalInvested: 0, deposits: 0, withdrawals: 0 },
+            goals: [{
+              id: `goal-${Date.now()}`,
+              name: `${plan || 'Starter'} Wealth Horizon`,
+              targetAmount: plan === 'Premium' ? 100000 : plan === 'Wealth' ? 500000 : plan === 'Builder' ? 5000 : plan === 'Growth' ? 25000 : 800,
+              currentAmount: 0, monthlyContribution: 250, targetDate: "2028-12-31",
+              riskProfile: "Balanced Growth",
+              allocation: { "US Equity": 50, "Emerging Tech": 30, "Cash": 20 },
+              tier: plan || 'Starter'
+            }]
+          };
+          db.users.push(newUser);
+          writeDb(db);
+          res.writeHead(200);
+          res.end(JSON.stringify({ success: true, user: newUser }));
+        } catch (e) { res.writeHead(400); res.end(JSON.stringify({ error: 'Malformed JSON payload' })); }
       });
       return;
     }

@@ -767,7 +767,7 @@ function getPortfolioView() {
         <span class="badge badge-green">+${gainPct}% All-Time Gain</span>
       </div>
       <div class="topbar-right">
-        <button class="btn btn-secondary btn-sm" onclick="showToast('Rebalance Simulated', 'Tax-advantaged rebalance executed across portfolio.', 'success')">Simulate Rebalance</button>
+        <button class="btn btn-secondary btn-sm" onclick="showToast('Rebalance Completed', 'Tax-advantaged asset rebalancing executed across portfolio.', 'success')">Execute Rebalance</button>
         <button class="btn btn-primary btn-sm" onclick="navigateTo('stocks')">Buy Equities</button>
       </div>
     </div>
@@ -1551,37 +1551,37 @@ function getCartView() {
                 <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
                   <div>
                     <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.35rem; text-transform: uppercase;">Contact Full Name</label>
-                    <input type="text" id="checkout-name" value="${AppState.currentUser?.name || 'Alex Rivers'}" required />
+                    <input type="text" id="checkout-name" value="${AppState.currentUser?.name || ''}" placeholder="Full Legal Name" required />
                   </div>
 
                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
                     <div>
                       <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.35rem; text-transform: uppercase;">Email Address</label>
-                      <input type="email" id="checkout-email" value="${AppState.currentUser?.email || 'alex@rivers.capital'}" required />
+                      <input type="email" id="checkout-email" value="${AppState.currentUser?.email || ''}" placeholder="contact@email.com" required />
                     </div>
                     <div>
                       <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.35rem; text-transform: uppercase;">Phone Number</label>
-                      <input type="tel" id="checkout-phone" value="+1 (555) 384-9921" required />
+                      <input type="tel" id="checkout-phone" placeholder="+1 (555) 000-0000" required />
                     </div>
                   </div>
 
                   <div>
                     <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.35rem; text-transform: uppercase;">Delivery Address</label>
-                    <input type="text" id="checkout-address" value="530 W 56th St, Penthouse 48" required />
+                    <input type="text" id="checkout-address" placeholder="Street Address, Suite / Apartment" required />
                   </div>
 
                   <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 0.75rem;">
                     <div>
                       <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.35rem; text-transform: uppercase;">City</label>
-                      <input type="text" id="checkout-city" value="Manhattan" required />
+                      <input type="text" id="checkout-city" placeholder="City" required />
                     </div>
                     <div>
                       <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.35rem; text-transform: uppercase;">State</label>
-                      <input type="text" id="checkout-state" value="NY" required />
+                      <input type="text" id="checkout-state" placeholder="State" required />
                     </div>
                     <div>
                       <label style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.35rem; text-transform: uppercase;">ZIP Code</label>
-                      <input type="text" id="checkout-zip" value="10019" required />
+                      <input type="text" id="checkout-zip" placeholder="Postal Code" required />
                     </div>
                   </div>
 

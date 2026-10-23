@@ -237,11 +237,11 @@ function handleSignUpSubmit(e) {
     roundUps: false,
     notifications: true,
     wallet: {
-      availableBalance: 1000.00,
+      availableBalance: 0.00,
       investmentValue: 0.00,
       earnings: 0.00,
       totalInvested: 0.00,
-      deposits: 1000.00,
+      deposits: 0.00,
       withdrawals: 0.00
     },
     goals: [
@@ -249,7 +249,7 @@ function handleSignUpSubmit(e) {
         id: `goal-${Date.now()}`,
         name: `${plan} Wealth Horizon`,
         targetAmount: plan === 'Starter' ? 800 : plan === 'Builder' ? 5000 : plan === 'Growth' ? 25000 : plan === 'Premium' ? 100000 : 500000,
-        currentAmount: 1000,
+        currentAmount: 0,
         monthlyContribution: 250,
         targetDate: "2028-12-31",
         riskProfile: "Balanced Growth",

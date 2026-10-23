@@ -223,8 +223,10 @@ function getAdminView() {
         <div style="display: grid; grid-template-columns: 280px 1fr; gap: 1.5rem; height: 420px;">
           <!-- User Selector List -->
           <div style="background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow-y: auto; padding: 0.5rem;">
-            ${users.map(u => `
-              <div onclick="selectAdminChatUser('${u.username}')" id="chat-tab-${u.username}" class="admin-chat-tab" style="padding: 0.75rem; border-radius: var(--radius-sm); cursor: pointer; margin-bottom: 0.35rem; transition: background 0.2s; background: ${u.username === 'AlexRivers' ? 'var(--bg-tertiary)' : 'transparent'};">
+            ${users.length === 0 ? `
+              <div style="padding: 1.5rem; text-align: center; color: var(--text-dim); font-size: 0.85rem;">No active user chats yet.</div>
+            ` : users.map((u, i) => `
+              <div onclick="selectAdminChatUser('${u.username}')" id="chat-tab-${u.username}" class="admin-chat-tab" style="padding: 0.75rem; border-radius: var(--radius-sm); cursor: pointer; margin-bottom: 0.35rem; transition: background 0.2s; background: ${i === 0 ? 'var(--bg-tertiary)' : 'transparent'};">
                 <div style="font-weight: 700; color: #fff; font-size: 0.9rem;">${u.name}</div>
                 <div style="font-size: 0.75rem; color: var(--text-dim);">@${u.username}</div>
               </div>
@@ -234,7 +236,7 @@ function getAdminView() {
           <!-- Active Chat Conversation -->
           <div style="display: flex; flex-direction: column; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1rem;">
             <div style="padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-subtle); font-weight: 700; font-size: 0.95rem; color: #fff; margin-bottom: 0.75rem;" id="admin-chat-header">
-              Chatting with @AlexRivers
+              ${users.length > 0 ? `Chatting with @${users[0].username}` : 'No active chat selected'}
             </div>
 
             <div id="admin-chat-box" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 0.75rem;">
