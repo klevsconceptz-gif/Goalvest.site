@@ -1,0 +1,67 @@
+{
+  "system": {
+    "name": "GoalVest Fullstack Ecosystem",
+    "version": "2.4.0",
+    "status": "online",
+    "domain": "https://goalvest.dev",
+    "androidPackage": "dev.goalvest.app",
+    "iosBundleId": "dev.goalvest.app"
+  },
+  "users": [
+    {
+      "username": "AlexRivers",
+      "name": "Alex Rivers",
+      "email": "alex@rivers.capital",
+      "password": "Password123!",
+      "plan": "Growth",
+      "riskProfile": "Aggressive",
+      "autoInvest": true,
+      "roundUps": true,
+      "notifications": true,
+      "wallet": {
+        "availableBalance": 42850.75,
+        "investmentValue": 185600,
+        "earnings": 24350.2,
+        "totalInvested": 161249.8,
+        "deposits": 145000,
+        "withdrawals": 18000
+      },
+      "goals": []
+    }
+  ],
+  "announcements": [
+    {
+      "id": "anc-1",
+      "title": "GoalVest Q4 Asset Allocation & Tax Rebalancing Now Live",
+      "body": "Our portfolio intelligence engine has implemented tax-loss harvesting and autonomous sector weighting adjustments across all Tier accounts.",
+      "audience": "All users",
+      "level": "Important",
+      "author": "Admin",
+      "createdDate": "2026-10-22 10:00"
+    }
+  ],
+  "paymentRequests": [
+    {
+      "id": "req-101",
+      "username": "AlexRivers",
+      "type": "Deposit",
+      "amount": 15000,
+      "method": "Bank Wire Transfer",
+      "details": "Ref: FED-992384 Wire from Chase Private Client",
+      "status": "Approved",
+      "timestamp": "2026-10-21 14:32:00"
+    }
+  ],
+  "activity": [
+    {
+      "id": "act-1",
+      "username": "AlexRivers",
+      "type": "Deposit",
+      "title": "Bank Wire Deposit",
+      "amount": 15000,
+      "date": "2026-10-21",
+      "status": "Completed",
+      "category": "Deposit"
+    }
+  ]
+}

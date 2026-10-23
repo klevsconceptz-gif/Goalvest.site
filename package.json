@@ -1,0 +1,21 @@
+{
+  "name": "goalvest-fullstack",
+  "version": "2.4.0",
+  "description": "GoalVest Fullstack Web & Mobile Platform",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js",
+    "build": "node deploy/build.js"
+  },
+  "keywords": [
+    "fintech",
+    "investing",
+    "ios",
+    "android",
+    "pwa",
+    "fullstack"
+  ],
+  "author": "GoalVest Engineering",
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,30 @@
+{
+  "package_name": "dev.goalvest.app",
+  "name": "GoalVest",
+  "launcher_name": "GoalVest",
+  "app_version": "2.4.0",
+  "app_version_code": 240,
+  "host": "goalvest.dev",
+  "start_url": "/",
+  "theme_color": "#060b14",
+  "navigation_color": "#0b1324",
+  "background_color": "#060b14",
+  "enable_notifications": true,
+  "signing": {
+    "scheme": "v2+v3",
+    "keystore": "release.keystore",
+    "alias": "goalvest"
+  },
+  "asset_statements": [
+    {
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "dev.goalvest.app",
+        "sha256_cert_fingerprints": [
+          "14:6D:E2:E2:B0:CD:A7:24:2C:1C:18:61:94:4E:91:0F:7F:A1:BF:CE:8B:2E:39:6C:52:E6:B3:34:F2:7E:6F:AC"
+        ]
+      }
+    }
+  ]
+}
