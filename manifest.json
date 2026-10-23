@@ -1,0 +1,21 @@
+{
+  "name": "GoalVest - Goal-Based Wealth & Multi-Asset Platform",
+  "short_name": "GoalVest",
+  "description": "Modern goal-based investing, wallet, marketplace, property, stock market, crypto and portfolio ecosystem.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060b14",
+  "theme_color": "#060b14",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}
