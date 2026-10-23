@@ -5,7 +5,7 @@
  */
 
 // Global active chat user for Admin Desk
-let currentAdminChatTarget = "AlexRivers";
+let currentAdminChatTarget = "";
 
 // -------------------------------------------------------------
 // MODAL RENDERERS
