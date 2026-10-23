@@ -162,7 +162,7 @@
       "channel": "Telegram Support / All Channels",
       "category": "Platform Update",
       "badge": "badge-green",
-      "date": "12 hours ago",
+      "date": "4 hours ago",
       "headline": "Instant User-to-User Transfers & Wire Authentication Live 🛡️",
       "content": "Our zero-fee peer-to-peer wallet transfer engine is running 24/7. Send instant liquidity to any registered @username worldwide. All bank wires and crypto deposits are authenticated with top-tier security standards.",
       "tags": [
@@ -172,6 +172,108 @@
       ],
       "stat": "0.00% Platform Fee",
       "shareText": "Instant zero-fee peer transfers and authenticated multi-asset wallets are live on https://goalvest.dev 🛡️"
+    },
+    {
+      "id": "sp-7",
+      "channel": "X / Twitter",
+      "category": "Market Alpha",
+      "badge": "badge-green",
+      "date": "5 hours ago",
+      "headline": "Semiconductor CapEx & AI Supercluster Buildout 🤖",
+      "content": "Hyperscalers have committed over $210B in annualized AI infrastructure. NVDA, AMD, and ASML hold steady margins as next-gen wafer packaging expands. Position your long-term Builder & Growth goal tiers for structural tailwinds.",
+      "tags": [
+        "#Semiconductors",
+        "#NVIDIA",
+        "#GoalVestAlpha",
+        "#TechInvesting"
+      ],
+      "stat": "$210B Annual CapEx",
+      "shareText": "Hyperscaler AI infrastructure commitments top $210B. Tap into structural tech growth directly via GoalVest: https://goalvest.dev 🤖"
+    },
+    {
+      "id": "sp-8",
+      "channel": "Instagram / Threads",
+      "category": "Wealth Discipline",
+      "badge": "badge-cyan",
+      "date": "6 hours ago",
+      "headline": "Automate First, Budget What Remains 💎",
+      "content": "The fundamental flaw in traditional budgeting is saving whatever is left over at month-end. Flip the script: route your GoalVest monthly contribution the exact hour income clears, then live freely on the rest.",
+      "tags": [
+        "#WealthBuilding",
+        "#PayYourselfFirst",
+        "#FinancialFreedom",
+        "#GoalVest"
+      ],
+      "stat": "3.4x Savings Rate",
+      "shareText": "Automate your investments the moment income clears. Build disciplined compounding with GoalVest: https://goalvest.dev 💎"
+    },
+    {
+      "id": "sp-9",
+      "channel": "Telegram VIP Exclusive",
+      "category": "REIT Intel",
+      "badge": "badge-purple",
+      "date": "7 hours ago",
+      "headline": "Metropolitan Multi-Family REIT Portfolio Update 🏢",
+      "content": "Our 2,400-unit transit-oriented residential portfolio maintains 96.8% physical occupancy with 7.2% dividend yields. Real assets provide durable quarterly cash flows that hedge monetary inflation.",
+      "tags": [
+        "#RealEstate",
+        "#PassiveYield",
+        "#REITs",
+        "#GoalVestVIP"
+      ],
+      "stat": "96.8% Tenancy",
+      "shareText": "2,400 transit units with 96.8% occupancy paying 7.2% dividend yields on GoalVest REITs: https://goalvest.dev 🏢"
+    },
+    {
+      "id": "sp-10",
+      "channel": "X / Threads",
+      "category": "Digital Assets",
+      "badge": "badge-amber",
+      "date": "8 hours ago",
+      "headline": "Cold-Vault Multisig & Proof-of-Solvency Standards 🔒",
+      "content": "GoalVest operates on 100% full-reserve architecture with institutional multisig custody. No unhedged rehypothecation, no hidden yield games. Your crypto, equities, and cash reserves are verifiably segregated 24/7.",
+      "tags": [
+        "#CryptoSecurity",
+        "#ColdStorage",
+        "#ProofOfReserves",
+        "#GoalVest"
+      ],
+      "stat": "100% Full Reserve",
+      "shareText": "100% full-reserve institutional custody for multi-asset portfolios. Experience institutional safety: https://goalvest.dev 🔒"
+    },
+    {
+      "id": "sp-11",
+      "channel": "Instagram / X",
+      "category": "Frontier Hardware",
+      "badge": "badge-blue",
+      "date": "10 hours ago",
+      "headline": "Tesla Optimus Gen 3 & Autonomous Warehousing 🦾",
+      "content": "Humanoid robotics are transitioning from laboratory prototypes to pilot assembly lines. Our Marketplace lets premium tier members allocate reservation deposits toward next-generation automated hardware.",
+      "tags": [
+        "#Optimus",
+        "#TeslaRobotics",
+        "#Automation",
+        "#Marketplace"
+      ],
+      "stat": "Gen 3 Hand Dexterity",
+      "shareText": "Tesla Optimus robotics reservations and clean hardware allocations live on GoalVest Marketplace: https://goalvest.dev 🦾"
+    },
+    {
+      "id": "sp-12",
+      "channel": "Telegram Support / All Channels",
+      "category": "Platform Update",
+      "badge": "badge-green",
+      "date": "12 hours ago",
+      "headline": "PWA Offline Mode & Fast Native Mobile Store Builds 📱",
+      "content": "GoalVest is officially certified for Apple iOS App Store Universal Links and Google Play Store TWA manifests. Add GoalVest to your mobile home screen with instant offline caching and zero install friction.",
+      "tags": [
+        "#AppStore",
+        "#GooglePlay",
+        "#PWA",
+        "#GoalVestMobile"
+      ],
+      "stat": "60 FPS Native",
+      "shareText": "Install GoalVest on iOS & Android with offline-first PWA caching and zero friction: https://goalvest.dev 📱"
     }
   ]
 }
