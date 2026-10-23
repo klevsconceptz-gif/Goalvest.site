@@ -221,6 +221,23 @@ const server = http.createServer((req, res) => {
       return;
     }
 
+    // Social Posts & Feed API
+    if (pathname === '/api/socials' && req.method === 'GET') {
+      const db = readDb();
+      res.writeHead(200);
+      res.end(JSON.stringify({
+        community: {
+          telegramVIP: "https://t.me/GoalVestVIP",
+          telegramSupport: "https://t.me/GoalVestSupport",
+          xTwitter: "https://x.com/GoalVestApp",
+          instagram: "https://instagram.com/GoalVestOfficial",
+          threads: "https://threads.net/@GoalVestOfficial"
+        },
+        posts: db.socialPosts || []
+      }));
+      return;
+    }
+
     // App Store and Play Store Manifest Config
     if (pathname === '/api/mobile/config' && req.method === 'GET') {
       res.writeHead(200);
