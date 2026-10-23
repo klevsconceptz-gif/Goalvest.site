@@ -7,9 +7,3 @@ pages_build_output_dir = "deploy/cloudflare-pages"
 ENVIRONMENT = "production"
 PRODUCTION_DOMAIN = "https://goalvest.dev"
 FALLBACK_DOMAIN = "https://goalvest.pages.dev"
-
-# Cloudflare Pages Functions KV Storage binding for live read/write database sync
-[[kv_namespaces]]
-binding = "GOALVEST_KV"
-id = "goalvest_kv_prod"
-preview_id = "goalvest_kv_preview"
