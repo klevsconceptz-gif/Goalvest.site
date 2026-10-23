@@ -10,10 +10,10 @@
  * /api/mobile/config
  */
 
-import seedDb from '../server/db.json';
+import { SEED_DB } from '../db.js';
 
 // In-memory cache for edge runtime lifecycle
-let edgeDbCache = JSON.parse(JSON.stringify(seedDb));
+let edgeDbCache = JSON.parse(JSON.stringify(SEED_DB));
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
