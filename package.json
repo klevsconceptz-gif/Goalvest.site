@@ -1,16 +1,24 @@
 {
   "name": "goalvest-fullstack",
   "version": "2.4.0",
-  "description": "GoalVest Fullstack Web & Mobile Platform",
+  "description": "GoalVest Fullstack Web & Mobile Platform for Cloudflare Pages and Mobile Stores",
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
     "dev": "node server/index.js",
-    "build": "node deploy/build.js"
+    "build": "node deploy/build.js",
+    "pages:build": "node deploy/build.js",
+    "pages:preview": "wrangler pages dev deploy/cloudflare-pages",
+    "pages:deploy": "wrangler pages deploy deploy/cloudflare-pages"
+  },
+  "devDependencies": {
+    "wrangler": "^3.114.17"
   },
   "keywords": [
     "fintech",
     "investing",
+    "cloudflare-pages",
+    "cloudflare-workers",
     "ios",
     "android",
     "pwa",
