@@ -59,6 +59,21 @@ export const SEED_DB = {
             "Cash": 10
           },
           "tier": "Wealth"
+        },
+        {
+          "id": "goal-3",
+          "name": "Autonomous Mobility Fund",
+          "targetAmount": 25000,
+          "currentAmount": 18200,
+          "monthlyContribution": 850,
+          "targetDate": "2027-04-15",
+          "riskProfile": "Growth",
+          "allocation": {
+            "Tech Equities": 70,
+            "Commodities": 15,
+            "Cash": 15
+          },
+          "tier": "Growth"
         }
       ]
     }
@@ -128,7 +143,7 @@ export const SEED_DB = {
       "channel": "Instagram / Threads",
       "category": "Wealth Discipline",
       "badge": "badge-cyan",
-      "date": "25 mins ago",
+      "date": "2 hours ago",
       "headline": "The 72-Hour Purchase Friction Rule ⏱️",
       "content": "Before dropping $1,000+ on non-essential lifestyle impulse purchases, enforce a mandatory 72-hour cooling period. 68% of impulse desires dissolve naturally. Put that capital into your Builder or Growth goal tier instead.",
       "tags": [
@@ -145,7 +160,7 @@ export const SEED_DB = {
       "channel": "Telegram VIP Exclusive",
       "category": "REIT Intel",
       "badge": "badge-purple",
-      "date": "1 hour ago",
+      "date": "4 hours ago",
       "headline": "Cash-Flowing Real Estate: Apex Innovation Tech REIT 🏙️",
       "content": "Fractional exposure to class-A commercial tech campuses across Austin & Silicon Valley. Paying out an estimated 8.4% dividend yield with quarterly automated distributions. Zero landlord headaches, 100% liquid fractional shares.",
       "tags": [
@@ -162,7 +177,7 @@ export const SEED_DB = {
       "channel": "X / Threads",
       "category": "Digital Assets",
       "badge": "badge-amber",
-      "date": "2 hours ago",
+      "date": "6 hours ago",
       "headline": "Bitcoin Dominance vs Layer-1 DeFi Velocity ⚡",
       "content": "BTC global dominance holds at 55.8% as institutions accumulate. Meanwhile, high-throughput Layer-1s like Solana and Layer-2 rollups Arbitrum/Optimism continue driving record TVL. Manage your blended equities and crypto in one single dashboard.",
       "tags": [
@@ -179,7 +194,7 @@ export const SEED_DB = {
       "channel": "Instagram / X",
       "category": "Frontier Hardware",
       "badge": "badge-blue",
-      "date": "3 hours ago",
+      "date": "8 hours ago",
       "headline": "Model S Plaid & Cybertruck Tier Allocations ⚡",
       "content": "From 0-60 in 1.99s to cold-rolled stainless steel utility, our GoalVest Marketplace connects goal plans directly to reservation deposits. Set a target date, fund monthly, and pick up your vehicle debt-free.",
       "tags": [
