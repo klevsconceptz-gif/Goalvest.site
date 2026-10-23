@@ -26,40 +26,7 @@
         "deposits": 145000,
         "withdrawals": 18000
       },
-      "goals": [
-        {
-          "id": "goal-1",
-          "name": "Cybertruck & Clean Garage",
-          "targetAmount": 120000,
-          "currentAmount": 84500,
-          "monthlyContribution": 2500,
-          "targetDate": "2027-12-31",
-          "riskProfile": "Moderate Growth",
-          "allocation": {
-            "US Equity": 40,
-            "Emerging Tech": 30,
-            "Fixed Income": 15,
-            "Cash": 15
-          },
-          "tier": "Premium"
-        },
-        {
-          "id": "goal-2",
-          "name": "Pacific Villa Down Payment",
-          "targetAmount": 1380000,
-          "currentAmount": 490000,
-          "monthlyContribution": 12000,
-          "targetDate": "2029-06-30",
-          "riskProfile": "Aggressive",
-          "allocation": {
-            "US Equity": 50,
-            "Real Estate REITs": 30,
-            "Crypto": 10,
-            "Cash": 10
-          },
-          "tier": "Wealth"
-        }
-      ]
+      "goals": []
     }
   ],
   "announcements": [

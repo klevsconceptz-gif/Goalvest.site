@@ -760,10 +760,51 @@ const DEFAULT_DEPOSIT_METHODS = [
   { id: "dep-3", name: "Instant ACH Transfer", instructions: "GoalVest Direct Clearing: Instant verification with Plaid / Micro-deposits.", active: true }
 ];
 
-// Local Storage Manager
+// Local Storage Manager with Backend REST API Synchronization
 class DataStore {
   constructor() {
     this.init();
+    this.syncFromBackend();
+  }
+
+  async syncFromBackend() {
+    try {
+      const res = await fetch('/api/db');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.users && (!localStorage.getItem("gv_users") || JSON.parse(localStorage.getItem("gv_users")).length === 0)) {
+          this.saveUsers(data.users);
+        }
+        if (data.paymentRequests && !localStorage.getItem("gv_payment_requests")) {
+          this.savePaymentRequests(data.paymentRequests);
+        }
+        if (data.announcements && !localStorage.getItem("gv_announcements")) {
+          this.saveAnnouncements(data.announcements);
+        }
+      }
+    } catch (e) {
+      // Offline fallback
+    }
+  }
+
+  async syncToBackend() {
+    try {
+      await fetch('/api/sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          users: this.getUsers(),
+          paymentRequests: this.getPaymentRequests(),
+          announcements: this.getAnnouncements(),
+          chats: this.getChats(),
+          orders: this.getOrders(),
+          activity: this.getActivity(),
+          depositMethods: this.getDepositMethods()
+        })
+      });
+    } catch (e) {
+      // Offline or static mode
+    }
   }
 
   init() {
@@ -858,6 +899,7 @@ class DataStore {
   }
   saveUsers(users) {
     localStorage.setItem("gv_users", JSON.stringify(users));
+    this.syncToBackend();
   }
   getUser(username) {
     const users = this.getUsers();
@@ -881,6 +923,7 @@ class DataStore {
   }
   saveDepositMethods(methods) {
     localStorage.setItem("gv_deposit_methods", JSON.stringify(methods));
+    this.syncToBackend();
   }
 
   getPaymentRequests() {
@@ -888,6 +931,7 @@ class DataStore {
   }
   savePaymentRequests(reqs) {
     localStorage.setItem("gv_payment_requests", JSON.stringify(reqs));
+    this.syncToBackend();
   }
 
   getAnnouncements() {
@@ -895,6 +939,7 @@ class DataStore {
   }
   saveAnnouncements(ancs) {
     localStorage.setItem("gv_announcements", JSON.stringify(ancs));
+    this.syncToBackend();
   }
 
   getChats() {
@@ -902,6 +947,7 @@ class DataStore {
   }
   saveChats(chats) {
     localStorage.setItem("gv_chats", JSON.stringify(chats));
+    this.syncToBackend();
   }
 
   getOrders() {
@@ -909,6 +955,7 @@ class DataStore {
   }
   saveOrders(orders) {
     localStorage.setItem("gv_orders", JSON.stringify(orders));
+    this.syncToBackend();
   }
 
   getActivity() {
@@ -918,6 +965,7 @@ class DataStore {
     const acts = this.getActivity();
     acts.unshift(item);
     localStorage.setItem("gv_activity", JSON.stringify(acts));
+    this.syncToBackend();
   }
 
   getSavedProperties() {
@@ -935,27 +983,41 @@ class DataStore {
   }
 }
 
-// Pricing Engine (Deterministic tick without external network)
+// Real-Time Deterministic & Live Tick Pricing Engine
 class PricingEngine {
   constructor() {
     this.tick = 0;
+    this.realTimeCache = {};
+    this.initLiveTickListener();
   }
 
-  // Gives a dynamic deterministic price modifier (-1.5% to +1.5%)
+  initLiveTickListener() {
+    // Generate organic market micro-volatility every 2 seconds
+    setInterval(() => {
+      this.tick++;
+      if (typeof window !== 'undefined' && window.dispatchEvent) {
+        window.dispatchEvent(new CustomEvent('gv-market-tick', { detail: { tick: this.tick } }));
+      }
+    }, 2000);
+  }
+
+  // Micro-fluctuation generator with realistic market drift
   getModifier(seedOffset = 0) {
-    const t = Math.sin((Date.now() / 8000) + seedOffset) * 0.015;
-    return 1 + t;
+    const timeFactor = (Date.now() / 4000) + seedOffset;
+    // Harmonic oscillation mimicking live exchange order-book spread
+    const primary = Math.sin(timeFactor) * 0.012;
+    const secondary = Math.cos(timeFactor * 1.618) * 0.006;
+    return 1 + (primary + secondary);
   }
 
   getStocks() {
     return STOCKS_DB.map((stock, i) => {
-      const mod = this.getModifier(i * 1.3);
+      const mod = this.getModifier(i * 1.37);
       const currentPrice = Number((stock.basePrice * mod).toFixed(2));
       const changePct = Number(((mod - 1) * 100).toFixed(2));
-      // Generate 7 sparkline points
       const sparkline = [];
       for (let p = 0; p < 7; p++) {
-        sparkline.push(Number((stock.basePrice * (1 + Math.sin(p + i) * 0.02)).toFixed(2)));
+        sparkline.push(Number((stock.basePrice * (1 + Math.sin(p + i + this.tick * 0.1) * 0.018)).toFixed(2)));
       }
       sparkline.push(currentPrice);
       return {
@@ -969,12 +1031,12 @@ class PricingEngine {
 
   getCrypto() {
     return CRYPTO_DB.map((c, i) => {
-      const mod = this.getModifier(i * 2.1);
+      const mod = this.getModifier(i * 2.33);
       const currentPrice = Number((c.basePrice * mod).toFixed(c.basePrice < 1 ? 5 : 2));
       const changePct = Number(((mod - 1) * 100).toFixed(2));
       const sparkline = [];
       for (let p = 0; p < 7; p++) {
-        sparkline.push(Number((c.basePrice * (1 + Math.cos(p + i) * 0.03)).toFixed(c.basePrice < 1 ? 5 : 2)));
+        sparkline.push(Number((c.basePrice * (1 + Math.cos(p + i + this.tick * 0.1) * 0.025)).toFixed(c.basePrice < 1 ? 5 : 2)));
       }
       sparkline.push(currentPrice);
       return {

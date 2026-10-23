@@ -187,6 +187,14 @@ const server = http.createServer((req, res) => {
       return;
     }
 
+    // Get Full Database / Sync State
+    if (pathname === '/api/db' && req.method === 'GET') {
+      const db = readDb();
+      res.writeHead(200);
+      res.end(JSON.stringify(db));
+      return;
+    }
+
     // Sync Data
     if (pathname === '/api/sync' && req.method === 'POST') {
       let body = '';
@@ -199,6 +207,9 @@ const server = http.createServer((req, res) => {
           if (payload.paymentRequests) db.paymentRequests = payload.paymentRequests;
           if (payload.announcements) db.announcements = payload.announcements;
           if (payload.activity) db.activity = payload.activity;
+          if (payload.chats) db.chats = payload.chats;
+          if (payload.orders) db.orders = payload.orders;
+          if (payload.depositMethods) db.depositMethods = payload.depositMethods;
           writeDb(db);
           res.writeHead(200);
           res.end(JSON.stringify({ success: true, syncedAt: new Date().toISOString() }));

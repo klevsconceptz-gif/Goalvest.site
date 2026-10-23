@@ -132,12 +132,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Refresh pricing tickers every 6 seconds smoothly
+  // Refresh pricing tickers every 3 seconds smoothly on live market views
   setInterval(() => {
-    if (['stocks', 'crypto'].includes(AppState.currentRoute)) {
+    // Only re-render if user is not actively typing into an input field or modal is not open
+    const isModalOpen = document.querySelector('.modal-backdrop.open');
+    const isTyping = document.activeElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName);
+    if (!isModalOpen && !isTyping && ['home', 'stocks', 'crypto'].includes(AppState.currentRoute)) {
       renderCurrentView();
     }
-  }, 6000);
+  }, 3000);
 });
 
 function handleHashRouting() {
