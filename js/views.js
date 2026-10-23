@@ -256,11 +256,35 @@ function getHomeView() {
             </ul>
           </div>
           <div>
-            <h4 style="font-size: 0.95rem; margin-bottom: 1.2rem; color: #fff; text-transform: uppercase; letter-spacing: 0.05em;">Administrator</h4>
-            <p style="font-size: 0.85rem; margin-bottom: 1rem;">
-              Admin access console with complete CRUD rights, user impersonation, deposit authentication, and announcement broadcasts.
-            </p>
-            <button class="btn btn-secondary btn-sm" onclick="openAuthModal('signin')">ADMIN CONSOLE LOGIN</button>
+            <h4 style="font-size: 0.95rem; margin-bottom: 1.2rem; color: #fff; text-transform: uppercase; letter-spacing: 0.05em;">Community &amp; Socials</h4>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+              <li>
+                <a href="${COMMUNITY_LINKS.telegramVIP}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 0.5rem; color: var(--accent-cyan-light);">
+                  <span style="width: 18px; height: 18px; display: inline-block;">${ICONS.telegram}</span> Telegram VIP Channel
+                </a>
+              </li>
+              <li>
+                <a href="${COMMUNITY_LINKS.telegramSupport}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 0.5rem; color: var(--accent-green-light);">
+                  <span style="width: 18px; height: 18px; display: inline-block;">${ICONS.telegram}</span> Telegram 24/7 Support Desk
+                </a>
+              </li>
+              <li>
+                <a href="${COMMUNITY_LINKS.xTwitter}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 0.5rem; color: #fff;">
+                  <span style="width: 18px; height: 18px; display: inline-block;">${ICONS.x}</span> X (@GoalVestApp)
+                </a>
+              </li>
+              <li>
+                <a href="${COMMUNITY_LINKS.instagram}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 0.5rem; color: #f43f5e;">
+                  <span style="width: 18px; height: 18px; display: inline-block;">${ICONS.instagram}</span> Instagram (@GoalVestOfficial)
+                </a>
+              </li>
+              <li>
+                <a href="${COMMUNITY_LINKS.threads}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 0.5rem; color: #e2e8f0;">
+                  <span style="width: 18px; height: 18px; display: inline-block;">${ICONS.threads}</span> Threads (@GoalVestOfficial)
+                </a>
+              </li>
+            </ul>
+            <button class="btn btn-secondary btn-sm btn-block" onclick="openAuthModal('signin')">ADMIN CONSOLE LOGIN</button>
           </div>
         </div>
         <div style="max-width: 1300px; margin: 3rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.82rem; color: var(--text-dim);">
@@ -295,6 +319,12 @@ function getDashboardView() {
         <span class="badge badge-green">${user.plan} Tier</span>
       </div>
       <div class="topbar-right">
+        <a href="${COMMUNITY_LINKS.telegramVIP}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="Join Telegram VIP Channel" style="display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent-cyan-light);">
+          <span style="width: 16px; height: 16px;">${ICONS.telegram}</span> VIP Channel
+        </a>
+        <a href="${COMMUNITY_LINKS.telegramSupport}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="Live Telegram Support Desk" style="display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent-green-light);">
+          <span style="width: 16px; height: 16px;">${ICONS.telegram}</span> Support Desk
+        </a>
         <button class="btn btn-secondary btn-sm" onclick="openDepositModal()">${ICONS.arrowDownLeft} Deposit</button>
         <button class="btn btn-secondary btn-sm" onclick="openWithdrawModal()">${ICONS.arrowUpRight} Withdraw</button>
         <button class="btn btn-primary btn-sm" onclick="openTransferModal()">${ICONS.users} Transfer</button>

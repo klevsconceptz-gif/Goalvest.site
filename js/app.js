@@ -48,7 +48,20 @@ const ICONS = {
   check: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>`,
   eye: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`,
   eyeOff: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`,
-  bolt: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`
+  bolt: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+  telegram: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.75 3.98-1.73 6.64-2.88 7.97-3.44 3.79-1.58 4.58-1.85 5.09-1.86.11 0 .37.03.53.17.14.12.18.28.2.45-.02.07-.02.19-.04.35z"/></svg>`,
+  x: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
+  instagram: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+  threads: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/></svg>`
+};
+
+// Official Verified Project Community & Social Media Channels
+const COMMUNITY_LINKS = {
+  telegramVIP: "https://t.me/GoalVestVIP",
+  telegramSupport: "https://t.me/GoalVestSupport",
+  xTwitter: "https://x.com/GoalVestApp",
+  instagram: "https://instagram.com/GoalVestOfficial",
+  threads: "https://threads.net/@GoalVestOfficial"
 };
 
 // Toast notification display
@@ -269,6 +282,23 @@ function renderSidebar() {
           ${ICONS.shield} Admin Console
         </a>
       ` : ''}
+
+      <div class="sidebar-nav-title" style="color: var(--text-dim); margin-top: 1rem;">Official Community</div>
+      <a href="${COMMUNITY_LINKS.telegramVIP}" target="_blank" rel="noopener noreferrer" class="sidebar-link" style="color: var(--accent-cyan-light);">
+        <span style="width: 20px; height: 20px;">${ICONS.telegram}</span> Telegram VIP
+      </a>
+      <a href="${COMMUNITY_LINKS.telegramSupport}" target="_blank" rel="noopener noreferrer" class="sidebar-link" style="color: var(--accent-green-light);">
+        <span style="width: 20px; height: 20px;">${ICONS.telegram}</span> Telegram Support
+      </a>
+      <a href="${COMMUNITY_LINKS.xTwitter}" target="_blank" rel="noopener noreferrer" class="sidebar-link" style="color: #fff;">
+        <span style="width: 20px; height: 20px;">${ICONS.x}</span> X (@GoalVestApp)
+      </a>
+      <a href="${COMMUNITY_LINKS.instagram}" target="_blank" rel="noopener noreferrer" class="sidebar-link" style="color: #f43f5e;">
+        <span style="width: 20px; height: 20px;">${ICONS.instagram}</span> Instagram
+      </a>
+      <a href="${COMMUNITY_LINKS.threads}" target="_blank" rel="noopener noreferrer" class="sidebar-link" style="color: #e2e8f0;">
+        <span style="width: 20px; height: 20px;">${ICONS.threads}</span> Threads
+      </a>
     </div>
     <div class="sidebar-footer">
       <div style="display: flex; align-items: center; gap: 0.75rem;">

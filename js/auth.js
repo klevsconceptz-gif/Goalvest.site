@@ -28,14 +28,11 @@ function renderAuthModalContent(mode) {
         </div>
         <button onclick="closeAuthModal()" style="color: var(--text-dim); font-size: 1.2rem;">${ICONS.close}</button>
       </div>
-      <form id="signin-form" onsubmit="handleSignInSubmit(event)">
+      <form id="signin-form" onsubmit="handleSignInSubmit(event)" autocomplete="off">
         <div class="modal-body">
-          <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: var(--radius-md); padding: 0.75rem 1rem; font-size: 0.82rem; color: var(--text-muted);">
-            <strong style="color: var(--accent-green-light);">Access Hint:</strong> Sign in with your registered username, or use <span style="color:#fff;">Admin</span> / <span style="color:#fff;">Admin@goal.vest</span> for Admin Console.
-          </div>
           <div>
             <label style="display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-muted);">Username or Email</label>
-            <input type="text" id="signin-username" placeholder="e.g. AlexRivers or Admin" required autofocus />
+            <input type="text" id="signin-username" placeholder="Enter username or email" required autofocus autocomplete="off" />
           </div>
           <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
@@ -43,7 +40,7 @@ function renderAuthModalContent(mode) {
               <a href="#" onclick="event.preventDefault(); renderAuthModalContent('forgot')" style="font-size: 0.78rem; color: var(--accent-cyan); font-weight: 500;">Forgot Password?</a>
             </div>
             <div style="position: relative;">
-              <input type="password" id="signin-password" placeholder="••••••••" required />
+              <input type="password" id="signin-password" placeholder="Enter password" required autocomplete="new-password" />
               <button type="button" onclick="togglePasswordVisibility('signin-password', this)" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted);">
                 ${ICONS.eye}
               </button>
@@ -67,19 +64,19 @@ function renderAuthModalContent(mode) {
         </div>
         <button onclick="closeAuthModal()" style="color: var(--text-dim); font-size: 1.2rem;">${ICONS.close}</button>
       </div>
-      <form id="signup-form" onsubmit="handleSignUpSubmit(event)">
+      <form id="signup-form" onsubmit="handleSignUpSubmit(event)" autocomplete="off">
         <div class="modal-body">
           <div>
             <label style="display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-muted);">Full Legal Name</label>
-            <input type="text" id="signup-name" placeholder="e.g. Elena Rostova" required />
+            <input type="text" id="signup-name" placeholder="Legal full name" required autocomplete="off" />
           </div>
           <div>
             <label style="display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-muted);">Username</label>
-            <input type="text" id="signup-username" placeholder="e.g. ElenaR" required />
+            <input type="text" id="signup-username" placeholder="Choose unique username" required autocomplete="off" />
           </div>
           <div>
             <label style="display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-muted);">Email Address</label>
-            <input type="email" id="signup-email" placeholder="elena@domain.com" required />
+            <input type="email" id="signup-email" placeholder="Email address" required autocomplete="off" />
           </div>
           <div>
             <label style="display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-muted);">Initial Goal Plan Tier</label>
@@ -95,7 +92,7 @@ function renderAuthModalContent(mode) {
           <div>
             <label style="display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-muted);">Create Secure Password</label>
             <div style="position: relative;">
-              <input type="password" id="signup-password" placeholder="At least 8 characters" required />
+              <input type="password" id="signup-password" placeholder="At least 8 characters" required autocomplete="new-password" />
               <button type="button" onclick="togglePasswordVisibility('signup-password', this)" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted);">
                 ${ICONS.eye}
               </button>
@@ -119,19 +116,19 @@ function renderAuthModalContent(mode) {
         </div>
         <button onclick="closeAuthModal()" style="color: var(--text-dim); font-size: 1.2rem;">${ICONS.close}</button>
       </div>
-      <form onsubmit="handlePasswordReset(event)">
+      <form onsubmit="handlePasswordReset(event)" autocomplete="off">
         <div class="modal-body">
           <p style="font-size: 0.88rem; color: var(--text-muted);">
-            Provide your registered username and we will generate a verified instant security reset token in your session.
+            Provide your registered username or email to update your secure password.
           </p>
           <div>
             <label style="display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-muted);">Username or Email</label>
-            <input type="text" id="reset-identity" placeholder="AlexRivers" required autofocus />
+            <input type="text" id="reset-identity" placeholder="Enter username or email" required autofocus autocomplete="off" />
           </div>
           <div>
             <label style="display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-muted);">New Password</label>
             <div style="position: relative;">
-              <input type="password" id="reset-newpassword" placeholder="Enter new password" required />
+              <input type="password" id="reset-newpassword" placeholder="Enter new password" required autocomplete="new-password" />
               <button type="button" onclick="togglePasswordVisibility('reset-newpassword', this)" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted);">
                 ${ICONS.eye}
               </button>
@@ -163,8 +160,14 @@ function togglePasswordVisibility(inputId, btn) {
 
 function handleSignInSubmit(e) {
   e.preventDefault();
-  const userField = document.getElementById('signin-username').value.trim();
-  const passField = document.getElementById('signin-password').value;
+  const userInput = document.getElementById('signin-username');
+  const passInput = document.getElementById('signin-password');
+  const userField = userInput.value.trim();
+  const passField = passInput.value;
+
+  // Immediately clear form inputs so no credentials or details remain
+  userInput.value = '';
+  passInput.value = '';
 
   // 1. Admin Verification
   if (userField.toLowerCase() === 'admin' && passField === 'Admin@goal.vest') {
@@ -172,7 +175,7 @@ function handleSignInSubmit(e) {
     AppState.currentUser = { username: 'Admin', role: 'admin' };
     sessionStorage.setItem('gv_current_user', 'Admin');
     closeAuthModal();
-    showToast('Administrator Authenticated', 'Welcome back, Admin. Opening Admin Console.', 'success');
+    showToast('Signed In', 'Administrator authenticated. Loading workspace.', 'success');
     navigateTo('admin');
     return;
   }
@@ -184,21 +187,33 @@ function handleSignInSubmit(e) {
     AppState.currentUser = user;
     sessionStorage.setItem('gv_current_user', user.username);
     closeAuthModal();
-    showToast('Signed In Successfully', `Welcome back, ${user.name}! Opening your personal dashboard.`, 'success');
+    showToast('Signed In', 'Welcome back! Opening your personal dashboard.', 'success');
     navigateTo('dashboard');
     return;
   }
 
-  showToast('Authentication Failed', 'Invalid credentials. For Admin use Admin / Admin@goal.vest or test with AlexRivers / Password123!', 'error');
+  showToast('Authentication Failed', 'Invalid username or password. Please verify your credentials.', 'error');
 }
 
 function handleSignUpSubmit(e) {
   e.preventDefault();
-  const name = document.getElementById('signup-name').value.trim();
-  const username = document.getElementById('signup-username').value.trim();
-  const email = document.getElementById('signup-email').value.trim();
-  const plan = document.getElementById('signup-plan').value;
-  const password = document.getElementById('signup-password').value;
+  const nameInput = document.getElementById('signup-name');
+  const usernameInput = document.getElementById('signup-username');
+  const emailInput = document.getElementById('signup-email');
+  const planInput = document.getElementById('signup-plan');
+  const passwordInput = document.getElementById('signup-password');
+
+  const name = nameInput.value.trim();
+  const username = usernameInput.value.trim();
+  const email = emailInput.value.trim();
+  const plan = planInput.value;
+  const password = passwordInput.value;
+
+  // Immediately clear form inputs so no details remain on screen
+  nameInput.value = '';
+  usernameInput.value = '';
+  emailInput.value = '';
+  passwordInput.value = '';
 
   if (username.toLowerCase() === 'admin') {
     showToast('Reserved Username', 'The username "Admin" is reserved for platform operations.', 'error');
@@ -248,30 +263,36 @@ function handleSignUpSubmit(e) {
   users.push(newUser);
   window.gvStore.saveUsers(users);
 
-  // Sign in newly registered user
+  // Directly sign in newly registered user without displaying form info
   AppState.isAdmin = false;
   AppState.currentUser = newUser;
   sessionStorage.setItem('gv_current_user', newUser.username);
   closeAuthModal();
 
-  showToast('Account Created!', `Welcome to GoalVest, ${name}. Your $1,000 starter credit has been funded!`, 'success');
+  showToast('Account Created', 'Registration complete. Logging into your dashboard.', 'success');
   navigateTo('dashboard');
 }
 
 function handlePasswordReset(e) {
   e.preventDefault();
-  const identity = document.getElementById('reset-identity').value.trim();
-  const newPass = document.getElementById('reset-newpassword').value;
+  const identityInput = document.getElementById('reset-identity');
+  const newPassInput = document.getElementById('reset-newpassword');
+  const identity = identityInput.value.trim();
+  const newPass = newPassInput.value;
+
+  // Immediately clear inputs
+  identityInput.value = '';
+  newPassInput.value = '';
 
   const user = window.gvStore.getUser(identity);
   if (!user) {
-    showToast('User Not Found', `No user registered under "${identity}".`, 'error');
+    showToast('User Not Found', 'No account found matching those details.', 'error');
     return;
   }
 
   user.password = newPass;
   window.gvStore.updateUser(user);
-  showToast('Password Updated', 'Your security password has been changed. Please SIGN IN.', 'success');
+  showToast('Password Updated', 'Your security password has been updated. Please sign in.', 'success');
   renderAuthModalContent('signin');
 }
 
