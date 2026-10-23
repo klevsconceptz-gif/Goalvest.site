@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "dev.goalvest.app",
+    "sha256_cert_fingerprints": [
+      "14:6D:E2:E2:B0:CD:A7:24:2C:1C:18:61:94:4E:91:0F:7F:A1:BF:CE:8B:2E:39:6C:52:E6:B3:34:F2:7E:6F:AC"
+    ]
+  }
+}]

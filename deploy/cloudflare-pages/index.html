@@ -76,5 +76,14 @@
   <script src="js/views.js"></script>
   <script src="js/admin.js"></script>
   <script src="js/modals.js"></script>
+
+  <!-- Service Worker Registration for PWA / Mobile Shell -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+  </script>
 </body>
 </html>

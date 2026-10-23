@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "TEAMID1234.dev.goalvest.app",
+        "paths": ["*"]
+      }
+    ]
+  }
+}
