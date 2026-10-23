@@ -1711,6 +1711,63 @@ function handleActivityCategoryFilter(val) {
   renderCurrentView();
 }
 
+function handleCopySocialText(postId) {
+  const post = (window.gvSocialPosts || []).find(p => p.id === postId);
+  if (!post) return;
+  const textToCopy = `${post.headline}\n\n${post.content}\n\n${post.tags.join(' ')}\n\nExplore GoalVest: https://goalvest.dev`;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      showToast('Copied to Clipboard', 'Social media post copied! Ready to paste into X, Telegram, or Threads.', 'success');
+    }).catch(() => {
+      prompt('Copy social post content:', textToCopy);
+    });
+  } else {
+    prompt('Copy social post content:', textToCopy);
+  }
+}
+
+function handleShareSocialPost(postId) {
+  const post = (window.gvSocialPosts || []).find(p => p.id === postId);
+  if (!post) return;
+
+  openGeneralModal(`
+    <div class="modal-header">
+      <div>
+        <h3 style="font-size: 1.25rem;">Broadcast Social Content</h3>
+        <p style="font-size: 0.82rem; margin-top: 2px;">Share directly across official project social channels</p>
+      </div>
+      <button onclick="closeGeneralModal()" style="color: var(--text-dim); font-size: 1.2rem;">${ICONS.close}</button>
+    </div>
+    <div class="modal-body">
+      <div style="background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1rem;">
+        <span class="badge ${post.badge}" style="margin-bottom: 0.5rem;">${post.category} &bull; ${post.channel}</span>
+        <h4 style="font-size: 1.1rem; color: #fff; margin-bottom: 0.5rem;">${post.headline}</h4>
+        <p style="font-size: 0.88rem; line-height: 1.6; color: var(--text-muted);">${post.content}</p>
+        <div style="margin-top: 0.75rem; font-size: 0.82rem; color: var(--accent-cyan-light); font-weight: 600;">${post.tags.join(' ')}</div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+        <a href="https://t.me/share/url?url=${encodeURIComponent('https://goalvest.dev')}&text=${encodeURIComponent(post.shareText)}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="color: var(--accent-cyan-light); justify-content: flex-start;">
+          <span style="width: 18px; height: 18px;">${ICONS.telegram}</span> Share to Telegram
+        </a>
+        <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(post.shareText)}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="color: #fff; justify-content: flex-start;">
+          <span style="width: 18px; height: 18px;">${ICONS.x}</span> Post to X
+        </a>
+        <a href="${COMMUNITY_LINKS.threads}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="color: #e2e8f0; justify-content: flex-start;">
+          <span style="width: 18px; height: 18px;">${ICONS.threads}</span> Post to Threads
+        </a>
+        <a href="${COMMUNITY_LINKS.instagram}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="color: #f43f5e; justify-content: flex-start;">
+          <span style="width: 18px; height: 18px;">${ICONS.instagram}</span> View on Instagram
+        </a>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary btn-sm" onclick="closeGeneralModal()">Close</button>
+      <button class="btn btn-primary btn-sm" onclick="handleCopySocialText('${post.id}')">${ICONS.copy} Copy Content</button>
+    </div>
+  `);
+}
+
 function handleSaveUserSettings() {
   const user = AppState.currentUser || window.gvStore.getUsers()[0];
   user.name = document.getElementById('setting-name').value;

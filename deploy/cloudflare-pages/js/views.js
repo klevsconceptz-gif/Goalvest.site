@@ -222,6 +222,67 @@ function getHomeView() {
         </div>
       </section>
 
+      <!-- Frequent Community & Social Broadcast Feed -->
+      <section id="socials-feed-section" style="max-width: 1300px; margin: 4.5rem auto 2rem; padding: 0 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+          <div>
+            <div style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.25rem 0.85rem; border-radius: var(--radius-full); background: rgba(16, 185, 129, 0.1); color: var(--accent-green-light); font-size: 0.8rem; font-weight: 700; margin-bottom: 0.75rem;">
+              FREQUENT SOCIAL BROADCASTS
+            </div>
+            <h2 style="font-size: 2.2rem;">Live Community &amp; Market Alpha</h2>
+            <p style="margin-top: 0.35rem; color: var(--text-muted);">
+              Daily market breakdowns, wealth strategies, and updates delivered across Telegram, X, Instagram &amp; Threads.
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <a href="${COMMUNITY_LINKS.telegramVIP}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="color: var(--accent-cyan-light);">
+              <span style="width: 16px; height: 16px;">${ICONS.telegram}</span> Telegram VIP
+            </a>
+            <a href="${COMMUNITY_LINKS.xTwitter}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="color: #fff;">
+              <span style="width: 16px; height: 16px;">${ICONS.x}</span> X / Twitter
+            </a>
+            <a href="${COMMUNITY_LINKS.instagram}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="color: #f43f5e;">
+              <span style="width: 16px; height: 16px;">${ICONS.instagram}</span> Instagram
+            </a>
+            <a href="${COMMUNITY_LINKS.threads}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="color: #e2e8f0;">
+              <span style="width: 16px; height: 16px;">${ICONS.threads}</span> Threads
+            </a>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem;">
+          ${(window.gvSocialPosts || []).map(post => `
+            <div class="gv-card gv-card-glow" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                  <span class="badge ${post.badge}">${post.channel}</span>
+                  <span style="font-size: 0.78rem; color: var(--text-dim);">${post.date}</span>
+                </div>
+                <h3 style="font-size: 1.15rem; color: #fff; margin-bottom: 0.65rem; line-height: 1.35;">${post.headline}</h3>
+                <p style="font-size: 0.88rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1rem;">
+                  ${post.content}
+                </p>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem;">
+                  ${post.tags.map(t => `<span style="font-size: 0.75rem; color: var(--accent-cyan-light); background: rgba(6, 182, 212, 0.08); padding: 0.2rem 0.5rem; border-radius: var(--radius-sm);">${t}</span>`).join('')}
+                </div>
+              </div>
+
+              <div style="padding-top: 0.85rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.82rem; font-weight: 700; color: var(--accent-green-light);">${post.stat}</span>
+                <div style="display: flex; gap: 0.4rem;">
+                  <button class="btn btn-secondary btn-sm" onclick="handleCopySocialText('${post.id}')" title="Copy Post">
+                    ${ICONS.copy} Copy
+                  </button>
+                  <button class="btn btn-primary btn-sm" onclick="handleShareSocialPost('${post.id}')" title="Share Content">
+                    ${ICONS.share2} Broadcast
+                  </button>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </section>
+
       <!-- Footer Section -->
       <footer style="background: var(--bg-secondary); border-top: 1px solid var(--border-subtle); padding: 4rem 2rem 2.5rem; margin-top: 5rem;">
         <div style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 3rem;">
@@ -463,7 +524,9 @@ function getDashboardView() {
               <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-green); box-shadow: 0 0 6px var(--accent-green);"></span>
               <h3 style="font-size: 1.1rem;">Direct Chat with Administrator</h3>
             </div>
-            <span style="font-size: 0.75rem; color: var(--accent-green-light); font-weight: 600;">Priority Desk Online</span>
+            <a href="${COMMUNITY_LINKS.telegramSupport}" target="_blank" rel="noopener noreferrer" style="font-size: 0.75rem; color: var(--accent-cyan-light); display: inline-flex; align-items: center; gap: 0.3rem;">
+              <span style="width: 14px; height: 14px;">${ICONS.telegram}</span> Live Telegram Support
+            </a>
           </div>
 
           <div id="user-chat-box" style="flex: 1; overflow-y: auto; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 0.75rem;">
