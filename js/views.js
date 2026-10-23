@@ -1556,41 +1556,29 @@ function getSimulatorView() {
 
     <div class="app-container">
       <div style="display: grid; grid-template-columns: 1fr 1.6fr; gap: 2rem;">
-        <!-- Left: Interactive Sliders -->
+        <!-- Left: Contribution Inputs -->
         <div class="gv-card">
           <h3 style="font-size: 1.2rem; margin-bottom: 1.25rem;">Simulation Parameters</h3>
           
-          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <div style="display: flex; flex-direction: column; gap: 1.25rem;">
             <div>
-              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted);">Starting Capital</label>
-                <span id="sim-start-val" style="font-weight: 800; color: #fff;">$10,000</span>
-              </div>
-              <input type="range" id="sim-start" min="100" max="1000000" step="500" value="10000" oninput="updateSimulation()" style="width: 100%; accent-color: var(--accent-green);" />
+              <label style="display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.35rem; text-transform: uppercase;">Starting Capital ($)</label>
+              <input type="number" id="sim-start" min="100" max="10000000" step="500" value="10000" oninput="updateSimulation()" placeholder="10000" />
             </div>
 
             <div>
-              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted);">Monthly Contribution</label>
-                <span id="sim-monthly-val" style="font-weight: 800; color: var(--accent-green-light);">$1,500/mo</span>
-              </div>
-              <input type="range" id="sim-monthly" min="50" max="25000" step="50" value="1500" oninput="updateSimulation()" style="width: 100%; accent-color: var(--accent-green);" />
+              <label style="display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.35rem; text-transform: uppercase;">Monthly Contribution ($)</label>
+              <input type="number" id="sim-monthly" min="0" max="250000" step="50" value="1500" oninput="updateSimulation()" placeholder="1500" />
             </div>
 
             <div>
-              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted);">Expected Annual Return</label>
-                <span id="sim-return-val" style="font-weight: 800; color: var(--accent-cyan-light);">10.5% APY</span>
-              </div>
-              <input type="range" id="sim-return" min="3" max="25" step="0.5" value="10.5" oninput="updateSimulation()" style="width: 100%; accent-color: var(--accent-cyan);" />
+              <label style="display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.35rem; text-transform: uppercase;">Expected Annual Return (% APY)</label>
+              <input type="number" id="sim-return" min="1" max="50" step="0.1" value="10.5" oninput="updateSimulation()" placeholder="10.5" />
             </div>
 
             <div>
-              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted);">Horizon Timeline</label>
-                <span id="sim-years-val" style="font-weight: 800; color: #fff;">10 Years</span>
-              </div>
-              <input type="range" id="sim-years" min="1" max="30" step="1" value="10" oninput="updateSimulation()" style="width: 100%; accent-color: var(--accent-purple);" />
+              <label style="display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.35rem; text-transform: uppercase;">Horizon Timeline (Years)</label>
+              <input type="number" id="sim-years" min="1" max="50" step="1" value="10" oninput="updateSimulation()" placeholder="10" />
             </div>
           </div>
         </div>
@@ -1603,18 +1591,21 @@ function getSimulatorView() {
             <div style="background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem; text-align: center;">
               <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase;">Estimated Portfolio Value</div>
               <div id="sim-total-result" style="font-size: 2.75rem; font-weight: 900; color: var(--accent-green-light); margin: 0.5rem 0;">$338,412</div>
-              <div id="sim-breakdown" style="font-size: 0.88rem; color: var(--text-muted);">Total Contributions: $190,000 &bull; Compound Interest: $148,412</div>
+              <div id="sim-breakdown" style="font-size: 0.88rem; color: var(--text-muted);">Total Principal Contributed: $190,000 &bull; Compound Earnings: +$148,412</div>
             </div>
 
-            <!-- Visual Bar Comparison -->
-            <div style="margin-bottom: 1.5rem;">
-              <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.35rem;">
-                <span style="color: var(--text-muted);">Principal vs Interest Compound Gain</span>
-                <span id="sim-interest-pct" style="font-weight: 700; color: var(--accent-cyan-light);">43.8% from Compounding</span>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; text-align: center; margin-bottom: 1.5rem;">
+              <div style="background: var(--bg-secondary); border-radius: var(--radius-md); padding: 1rem;">
+                <div style="font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase;">Starting Capital</div>
+                <div id="sim-summary-start" style="font-size: 1.2rem; font-weight: 800; color: #fff; margin-top: 4px;">$10,000</div>
               </div>
-              <div style="height: 14px; background: var(--bg-tertiary); border-radius: var(--radius-full); overflow: hidden; display: flex;">
-                <div id="sim-bar-principal" style="width: 56%; background: var(--accent-blue);" title="Contributions"></div>
-                <div id="sim-bar-interest" style="width: 44%; background: var(--accent-green);" title="Compound Growth"></div>
+              <div style="background: var(--bg-secondary); border-radius: var(--radius-md); padding: 1rem;">
+                <div style="font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase;">Monthly Deposits</div>
+                <div id="sim-summary-monthly" style="font-size: 1.2rem; font-weight: 800; color: var(--accent-green-light); margin-top: 4px;">$1,500/mo</div>
+              </div>
+              <div style="background: var(--bg-secondary); border-radius: var(--radius-md); padding: 1rem;">
+                <div style="font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase;">Return Rate</div>
+                <div id="sim-summary-return" style="font-size: 1.2rem; font-weight: 800; color: var(--accent-cyan-light); margin-top: 4px;">10.5% APY</div>
               </div>
             </div>
           </div>

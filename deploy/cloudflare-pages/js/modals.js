@@ -1551,20 +1551,23 @@ function updateSimulation() {
 
   if (!startEl) return;
 
-  const P = Number(startEl.value);
-  const PMT = Number(monthlyEl.value);
-  const r = Number(returnEl.value) / 100;
-  const years = Number(yearsEl.value);
+  const P = Number(startEl.value) || 0;
+  const PMT = Number(monthlyEl.value) || 0;
+  const r = (Number(returnEl.value) || 0) / 100;
+  const years = Number(yearsEl.value) || 1;
   const n = 12;
-  const t = years;
+  const t = Math.max(1, years);
 
-  document.getElementById('sim-start-val').innerText = formatCurrency(P);
-  document.getElementById('sim-monthly-val').innerText = `${formatCurrency(PMT)}/mo`;
-  document.getElementById('sim-return-val').innerText = `${(r * 100).toFixed(1)}% APY`;
-  document.getElementById('sim-years-val').innerText = `${years} Years`;
+  // Update stat summaries if present
+  const sumStart = document.getElementById('sim-summary-start');
+  const sumMonthly = document.getElementById('sim-summary-monthly');
+  const sumReturn = document.getElementById('sim-summary-return');
+  if (sumStart) sumStart.innerText = formatCurrency(P);
+  if (sumMonthly) sumMonthly.innerText = `${formatCurrency(PMT)}/mo`;
+  if (sumReturn) sumReturn.innerText = `${(r * 100).toFixed(1)}% APY`;
 
   // Compound formula: FV = P*(1+r/n)^(nt) + PMT * [((1+r/n)^(nt) - 1) / (r/n)]
-  const rateMonthly = r / n;
+  const rateMonthly = r > 0 ? r / n : 0.0001;
   const totalMonths = n * t;
   const compoundMultiplier = Math.pow(1 + rateMonthly, totalMonths);
   const fvPrincipal = P * compoundMultiplier;
@@ -1572,18 +1575,11 @@ function updateSimulation() {
   const totalFV = Math.round(fvPrincipal + fvContributions);
   const totalDeposited = Math.round(P + (PMT * totalMonths));
   const compoundGain = Math.max(0, totalFV - totalDeposited);
-  const gainPct = Math.round((compoundGain / totalFV) * 100);
 
-  document.getElementById('sim-total-result').innerText = formatCurrency(totalFV);
-  document.getElementById('sim-breakdown').innerHTML = `Total Principal Contributed: <strong style="color:#fff;">${formatCurrency(totalDeposited)}</strong> &bull; Compound Earnings: <strong style="color:var(--accent-green-light);">+${formatCurrency(compoundGain)}</strong>`;
-  document.getElementById('sim-interest-pct').innerText = `${gainPct}% of terminal wealth from Compounding`;
-
-  const barPrin = document.getElementById('sim-bar-principal');
-  const barInt = document.getElementById('sim-bar-interest');
-  if (barPrin && barInt) {
-    barPrin.style.width = `${100 - gainPct}%`;
-    barInt.style.width = `${gainPct}%`;
-  }
+  const totalEl = document.getElementById('sim-total-result');
+  const breakdownEl = document.getElementById('sim-breakdown');
+  if (totalEl) totalEl.innerText = formatCurrency(totalFV);
+  if (breakdownEl) breakdownEl.innerHTML = `Total Principal Contributed: <strong style="color:#fff;">${formatCurrency(totalDeposited)}</strong> &bull; Compound Earnings: <strong style="color:var(--accent-green-light);">+${formatCurrency(compoundGain)}</strong>`;
 }
 
 // -------------------------------------------------------------
